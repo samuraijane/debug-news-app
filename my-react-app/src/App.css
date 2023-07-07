@@ -49,3 +49,25 @@ nav {
   display: flex;
   justify-content: space-around;
 }
+
+.newsContainer{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.newsContainer > div{
+  width: 30%;
+}
+
+header{
+  height: 10vh;
+}
+footer{
+  height: 10vh;
+}
+main {
+  min-height: 80vh;
+}

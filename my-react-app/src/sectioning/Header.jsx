@@ -1,19 +1,20 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
     <header>
       <div className="y-wrap">
         <nav>
-          <NavLink to="/">US</NavLink>
-          <NavLink to="world">World</NavLink>
-          <NavLink to="politics">Politics</NavLink>
-          <NavLink to="business">Business</NavLink>
-          <NavLink to="health">Health</NavLink>
-          <NavLink to="entertainment">Entertainment</NavLink>
-          <NavLink to="travel">Travel</NavLink>
-          <NavLink to="sports">Sports</NavLink>
+          <Link to="/headlines">Headlines</Link>
+          <Link to="/">US</Link>
+          <Link to="/world">World</Link>
+          <Link to="/politics">Politics</Link>
+          <Link to="/business">Business</Link>
+          <Link to="/health">Health</Link>
+          <Link to="/entertainment">Entertainment</Link>
+          <Link to="/travel">Travel</Link>
+          <Link to="/sports">Sports</Link>
         </nav>
       </div>
     </header>

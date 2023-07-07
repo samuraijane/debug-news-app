@@ -2,14 +2,13 @@ import React from "react";
 import Footer from "../sectioning/Footer";
 import Header from "../sectioning/Header";
 
-const World = () => {
+const Headlines = () => {
   return (
     <>
       <Header />
-      <main class="y-wrap">World News</main>
+      <main class="y-wrap">Headlines News</main>
       <Footer />
     </>
   );
 };
-
-export default World;
+export default Headlines;
