@@ -7,7 +7,7 @@ const Header = () => {
       <div className="y-wrap">
         <nav>
           <Link to="/headlines">Headlines</Link>
-          <Link to="/">US</Link>
+
           <Link to="/world">World</Link>
           <Link to="/politics">Politics</Link>
           <Link to="/business">Business</Link>
@@ -15,6 +15,8 @@ const Header = () => {
           <Link to="/entertainment">Entertainment</Link>
           <Link to="/travel">Travel</Link>
           <Link to="/sports">Sports</Link>
+          <Link to="/profile">Profile</Link>
+          <Link to="/account">Account</Link>
         </nav>
       </div>
     </header>

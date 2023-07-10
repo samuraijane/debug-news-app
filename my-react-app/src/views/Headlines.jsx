@@ -50,9 +50,10 @@ const Headlines = () => {
   const [headlines, setHeadlines] = useState([]);
 
   useEffect(() => {
-    fetch("https://newsapi.org/v2/top-headlines?country=us&apiKey=97ff5fe754fd47b9830aa078f40a6acc")
+    fetch("http://localhost:8080/api/headlines/")
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         setHeadlines(data.articles);
       })
       .catch((error) => {

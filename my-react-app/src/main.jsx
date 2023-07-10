@@ -8,13 +8,22 @@ import "./index.css";
 import Category from "./views/Category.jsx";
 import World from "./views/World.jsx";
 import Headlines from "./views/Headlines.jsx";
+import UserProfilePage from "./views/UserProfilePage.jsx";
+import AccountPage from "./views/AccountPage.jsx";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/", // homepg landing
     element: <App />,
   },
-
+  {
+    path: "/profile",
+    element: <UserProfilePage />,
+  },
+  {
+    path: "/account",
+    element: <AccountPage />,
+  },
   {
     path: "/headlines",
     element: <Headlines />,
