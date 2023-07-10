@@ -20,6 +20,8 @@ server.get('/heartbeat', (req, res) => {
   res.json({ message: 'heartbeat' });
 });
 
+
+// server points 
 server.use("/api/articles",articleRoutes); //combined here
 server.use("/api/headlines",headlineRoutes)
 server.use("/api/account",accountRoutes)

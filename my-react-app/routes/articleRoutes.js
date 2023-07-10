@@ -1,5 +1,5 @@
 import express from 'express';
-let router = express.Router();
+let router = express.Router(); // handle url 
 
 
 //get all articles
@@ -59,4 +59,3 @@ router.delete("/:id", (req, res) => {
 
 
 export default router;
-
