@@ -5,6 +5,7 @@ import articleRoutes from './routes/articleRoutes.js';
 import headlineRoutes  from './routes/headlineRoutes.js';
 import accountRoutes from './routes/accountRoutes.js';
 import authRoutes from './routes/authRoutes.js';
+import worldRoutes from './routes/worldRoutes.js';
 import cors from 'cors';
 
 
@@ -24,6 +25,7 @@ server.get('/heartbeat', (req, res) => {
 // server points 
 server.use("/api/articles",articleRoutes); //combined here
 server.use("/api/headlines",headlineRoutes)
+server.use("/api/world",worldRoutes);
 server.use("/api/account",accountRoutes)
 server.use("/auth",authRoutes)
 

@@ -65,8 +65,10 @@ const World = () => {
   useEffect(() => {
     fetch("https://restcountries.com/v3.1/all")
       .then((response) => response.json())
+      
       .then((data) => {
         setCountries(data);
+
       })
       .catch((error) => {
         console.log("Error fetching countries:", error);
@@ -75,9 +77,7 @@ const World = () => {
 
   useEffect(() => {
     if (selectedCountry) {
-      fetch(
-        `https://newsapi.org/v2/top-headlines?country=${selectedCountry.alpha2Code}&apiKey=97ff5fe754fd47b9830aa078f40a6acc`
-      )
+      fetch(`http://localhost:8080/api/world/${selectedCountry.name.common}`)
         .then((response) => response.json())
         .then((data) => {
           setHeadlines(data.articles);
@@ -87,6 +87,7 @@ const World = () => {
         });
     }
   }, [selectedCountry]);
+  
 
   const handleCountryClick = (country) => {
     setSelectedCountry(country);

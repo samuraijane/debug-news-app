@@ -15,35 +15,50 @@ const Title = styled.h1`
   margin-bottom: 20px;
 `;
 
-const HeadlineContainer = styled.div`
-  background-color: #f5f5f5;
-  border-radius: 5px;
-  padding: 10px;
-  margin-bottom: 10px;
+const NewsContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
+const NewsCard = styled.div`
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 300px;
 `;
 
-const HeadlineImage = styled.img`
-  width: 100px;
-  height: 100px;
-  border-radius: 5px;
+const NewsImage = styled.img`
+  width: 100%;
+  height: 200px;
+  border-radius: 10px;
   object-fit: cover;
-  margin-right: 10px;
+  margin-bottom: 10px;
 `;
 
-const HeadlineContent = styled.div`
-  flex-grow: 1;
-`;
-
-const HeadlineTitle = styled.h2`
+const NewsTitle = styled.h2`
   font-size: 18px;
   margin-bottom: 5px;
+  text-align: center;
 `;
 
-const HeadlineDescription = styled.p`
+const NewsDescription = styled.p`
   font-size: 14px;
   color: #666;
+  text-align: center;
+`;
+
+const NewsLink = styled.a`
+  font-size: 14px;
+  color: #0366d6;
+  text-decoration: none;
+  margin-top: 10px;
+  text-align: center;
 `;
 
 const Headlines = () => {
@@ -66,17 +81,24 @@ const Headlines = () => {
       <Header />
       <Main>
         <Title>Headlines News</Title>
-        {headlines.map((headline, index) => (
-          <HeadlineContainer key={index}>
-            {headline.urlToImage && (
-              <HeadlineImage src={headline.urlToImage} alt="Article" />
-            )}
-            <HeadlineContent>
-              <HeadlineTitle>{headline.title}</HeadlineTitle>
-              <HeadlineDescription>{headline.description}</HeadlineDescription>
-            </HeadlineContent>
-          </HeadlineContainer>
-        ))}
+        <NewsContainer>
+          {headlines.map((headline, index) => (
+            <NewsCard key={index}>
+              {headline.urlToImage && (
+                <NewsImage src={headline.urlToImage} alt="Article" />
+              )}
+              <NewsTitle>{headline.title}</NewsTitle>
+              <NewsDescription>{headline.description}</NewsDescription>
+              <NewsLink
+                href={headline.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Read More
+              </NewsLink>
+            </NewsCard>
+          ))}
+        </NewsContainer>
       </Main>
       <Footer />
     </>
