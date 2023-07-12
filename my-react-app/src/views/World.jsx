@@ -4,6 +4,7 @@ import Footer from "../sectioning/Footer";
 import Header from "../sectioning/Header";
 import GlobalStyles from "../components/GlobalStyles";
 
+
 const Main = styled.main`
   display: flex;
   flex-direction: column;
@@ -14,9 +15,9 @@ const Main = styled.main`
 const Title = styled.h1`
   font-size: 24px;
   margin-bottom: 20px;
-  color: blue;
+  color: #fff;
+  font-style: italic;
 `;
-
 const SearchInput = styled.input`
   width: 300px;
   height: 30px;
@@ -24,7 +25,6 @@ const SearchInput = styled.input`
   margin-bottom: 10px;
   color: black;
 `;
-
 const CountryList = styled.ul`
   display: flex;
   flex-wrap: wrap;
@@ -45,17 +45,42 @@ const CountryItem = styled.li`
 `;
 
 const NewsContainer = styled.div`
-  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 `;
 
-const HeadlineTitle = styled.h2`
+const NewsCard = styled.a`
+  text-decoration: none;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 300px;
+`;
+
+const NewsImage = styled.img`
+  width: 100%;
+  height: 200px;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-bottom: 10px;
+`;
+
+const NewsTitle = styled.h2`
   font-size: 18px;
   margin-bottom: 5px;
+  text-align: center;
 `;
 
-const HeadlineDescription = styled.p`
+const NewsDescription = styled.p`
   font-size: 14px;
   color: #666;
+  text-align: center;
 `;
 
 const World = () => {
@@ -63,14 +88,13 @@ const World = () => {
   const [searchCountry, setSearchCountry] = useState("");
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [headlines, setHeadlines] = useState([]);
+  const [selectedCountryArticles, setSelectedCountryArticles] = useState([]);
 
   useEffect(() => {
     fetch("https://restcountries.com/v3.1/all")
       .then((response) => response.json())
-      
       .then((data) => {
         setCountries(data);
-
       })
       .catch((error) => {
         console.log("Error fetching countries:", error);
@@ -87,12 +111,34 @@ const World = () => {
         .catch((error) => {
           console.log("Error fetching headlines:", error);
         });
+
+      const apiKey = "97ff5fe754fd47b9830aa078f40a6acc";
+      fetch(
+        `https://newsapi.org/v2/top-headlines?q=${selectedCountry.name.common}&apiKey=${apiKey}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          setSelectedCountryArticles(data.articles);
+        })
+        .catch((error) => {
+          console.log("Error fetching country articles:", error);
+        });
     }
   }, [selectedCountry]);
-  
 
   const handleCountryClick = (country) => {
     setSelectedCountry(country);
+    const apiKey = "97ff5fe754fd47b9830aa078f40a6acc";
+    fetch(
+      `https://newsapi.org/v2/top-headlines?q=${country.name.common}&apiKey=${apiKey}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setSelectedCountryArticles(data.articles);
+      })
+      .catch((error) => {
+        console.log("Error fetching country articles:", error);
+      });
   };
 
   const handleSearchInputChange = (event) => {
@@ -105,7 +151,7 @@ const World = () => {
 
   return (
     <>
-    <GlobalStyles />
+      <GlobalStyles />
       <Header />
       <Main>
         <Title>World News</Title>
@@ -130,12 +176,24 @@ const World = () => {
         {selectedCountry && (
           <NewsContainer>
             <h2>{selectedCountry.name.common} News</h2>
-            {headlines.map((headline, index) => (
-              <div key={index}>
-                <HeadlineTitle>{headline.title}</HeadlineTitle>
-                <HeadlineDescription>{headline.description}</HeadlineDescription>
-              </div>
-            ))}
+            {selectedCountryArticles ? (
+              selectedCountryArticles.map((article, index) => (
+                <NewsCard
+                  key={index}
+                  href={article.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {article.urlToImage && (
+                    <NewsImage src={article.urlToImage} alt="Article" />
+                  )}
+                  <NewsTitle>{article.title}</NewsTitle>
+                  <NewsDescription>{article.description}</NewsDescription>
+                </NewsCard>
+              ))
+            ) : (
+              <p>Loading articles...</p>
+            )}
           </NewsContainer>
         )}
       </Main>

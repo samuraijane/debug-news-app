@@ -13,17 +13,9 @@ const Main = styled.main`
 const Title = styled.h1`
   font-size: 24px;
   margin-bottom: 20px;
-  color: blue;
+  color: #fff;
   font-style: italic;
 `;
-
-const NewsContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-`;
-
-
 
 const NewsContainer = styled.div`
   display: flex;
