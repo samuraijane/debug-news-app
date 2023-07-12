@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Footer from "../sectioning/Footer";
 import Header from "../sectioning/Header";
-
+import GlobalStyles from "../components/GlobalStyles";
 const Main = styled.main`
   display: flex;
   flex-direction: column;
@@ -13,6 +13,8 @@ const Main = styled.main`
 const Title = styled.h1`
   font-size: 24px;
   margin-bottom: 20px;
+  color: blue;
+  font-style: italic;
 `;
 
 const NewsContainer = styled.div`
@@ -20,6 +22,15 @@ const NewsContainer = styled.div`
   flex-wrap: wrap;
   justify-content: center;
 `;
+
+
+
+const NewsContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
 
 const NewsCard = styled.div`
   background-color: #f5f5f5;
@@ -78,9 +89,10 @@ const Headlines = () => {
 
   return (
     <>
+    <GlobalStyles/>
       <Header />
       <Main>
-        <Title>Headlines News</Title>
+        <Title>Headline News</Title>
         <NewsContainer>
           {headlines.map((headline, index) => (
             <NewsCard key={index}>

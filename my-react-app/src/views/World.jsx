@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Footer from "../sectioning/Footer";
 import Header from "../sectioning/Header";
+import GlobalStyles from "../components/GlobalStyles";
 
 const Main = styled.main`
   display: flex;
@@ -13,6 +14,7 @@ const Main = styled.main`
 const Title = styled.h1`
   font-size: 24px;
   margin-bottom: 20px;
+  color: blue;
 `;
 
 const SearchInput = styled.input`
@@ -103,6 +105,7 @@ const World = () => {
 
   return (
     <>
+    <GlobalStyles />
       <Header />
       <Main>
         <Title>World News</Title>

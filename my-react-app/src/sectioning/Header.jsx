@@ -1,9 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import GlobalStyles from "../components/GlobalStyles";
 
 const Header = () => {
   return (
+    
     <header>
+      <GlobalStyles/>
       <div className="y-wrap">
         <nav>
           <Link to="/headlines">Headlines</Link>
@@ -24,3 +27,4 @@ const Header = () => {
 };
 
 export default Header; // default means unnamed export
+

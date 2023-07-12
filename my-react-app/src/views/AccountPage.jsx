@@ -1,4 +1,58 @@
 import React, { useState } from "react";
+import styled from "styled-components";
+import GlobalStyles from "../components/GlobalStyles";
+
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+`;
+
+const Title = styled.h1`
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: blue;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+`;
+
+const FormItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+`;
+
+const Label = styled.label`
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: blue;
+`;
+
+const Input = styled.input`
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+`;
+
+const Button = styled.button`
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+`;
+
 
 const AccountPage = () => {
   const [formData, setFormData] = useState({
@@ -19,12 +73,14 @@ const AccountPage = () => {
   };
 
   return (
-    <div>
-      <h1>Account Settings</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>ID:</label>
-          <input
+    <>
+    <GlobalStyles/>
+    <Container>
+      <Title>Account Settings</Title>
+      <Form onSubmit={handleSubmit}>
+        <FormItem>
+          <Label>ID:</Label>
+          <Input
             type="text"
             name="id"
             value={formData.id}
@@ -32,10 +88,10 @@ const AccountPage = () => {
             placeholder="ID"
             required
           />
-        </div>
-        <div>
-          <label>Name:</label>
-          <input
+        </FormItem>
+        <FormItem>
+          <Label>Name:</Label>
+          <Input
             type="text"
             name="name"
             value={formData.name}
@@ -43,10 +99,10 @@ const AccountPage = () => {
             placeholder="Name"
             required
           />
-        </div>
-        <div>
-          <label>Email:</label>
-          <input
+        </FormItem>
+        <FormItem>
+          <Label>Email:</Label>
+          <Input
             type="email"
             name="email"
             value={formData.email}
@@ -54,10 +110,10 @@ const AccountPage = () => {
             placeholder="Email"
             required
           />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input
+        </FormItem>
+        <FormItem>
+          <Label>Password:</Label>
+          <Input
             type="password"
             name="password"
             value={formData.password}
@@ -65,11 +121,13 @@ const AccountPage = () => {
             placeholder="Password"
             required
           />
-        </div>
-        <button type="submit">Save Changes</button>
-      </form>
-    </div>
+        </FormItem>
+        <Button type="submit">Login</Button>
+      </Form>
+    </Container>
+    </>
   );
 };
+
 
 export default AccountPage;
