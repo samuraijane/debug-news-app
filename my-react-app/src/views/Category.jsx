@@ -3,7 +3,7 @@ import Header from "../sectioning/Header";
 import Footer from "../sectioning/Footer";
 import { useParams, Link } from "react-router-dom"; // need this for url information/changes to used in line 8
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-
+import styled from 'styled-components'
 
 import GlobalStyles from "../components/GlobalStyles";
 
