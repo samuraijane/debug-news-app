@@ -4,12 +4,97 @@ import Header from "../sectioning/Header";
 import Footer from "../sectioning/Footer";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import styled from "styled-components";
-
-
-
-
 import GlobalStyles from "../components/GlobalStyles";
 
+
+
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  const formattedDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+  return formattedDate;
+};
+
+const Category = () => {
+  const [data, setData] = useState([]);
+  const { category } = useParams();
+
+  const [likedArticles, setLikedArticles] = useState([]);
+
+  const saveHandler = async (url) => {
+    console.log("myKey", url);
+    const response = await fetch("http://localhost:8080/api/articles/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user_id: 1,
+        article_id: url,
+      }),
+    });
+    const responseData = await response.json();
+    console.log(responseData);
+  };
+
+  useEffect(() => {
+    const getNewsData = async () => {
+      const url = `http://localhost:8080/api/articles/category/${category}`;
+      const response = await fetch(url);
+      const data = await response.json();
+      setData(data.articles);
+      console.log(category, ":", data);
+    };
+
+    getNewsData();
+  }, [category]);
+
+  const handleLikeArticle = (event, url) => {
+    event.preventDefault(); // Prevent link behavior
+    if (likedArticles.includes(url)) {
+      setLikedArticles(likedArticles.filter((article) => article !== url));
+    } else {
+      setLikedArticles([...likedArticles, url]);
+    }
+  };
+
+  const isArticleLiked = (url) => {
+    return likedArticles.includes(url);
+  };
+
+  return (
+    <>
+      <Header />
+      <Main className={`${category}Page`}>
+        <CategoryTitle>{category}</CategoryTitle>
+        <NewsContainer>
+          {data.map((article, index) => (
+            <NewsCard to={article.url} key={index}>
+              {article.urlToImage && (
+                <NewsImage src={article.urlToImage} alt="Article" />
+              )}
+              <NewsTitle>{article.title}</NewsTitle>
+              <NewsDescription>{article.description}</NewsDescription>
+              <NewsPublishedAt>{formatDate(article.publishedAt)}</NewsPublishedAt>
+              <HeartContainer>
+                {isArticleLiked(article.url) ? (
+                  <FilledHeartIcon
+                    onClick={(event) => handleLikeArticle(event, article.url)}
+                  />
+                ) : (
+                  <HeartIcon
+                    isLiked={isArticleLiked(article.url)}
+                    onClick={(event) => handleLikeArticle(event, article.url)}
+                  />
+                )}
+              </HeartContainer>
+            </NewsCard>
+          ))}
+        </NewsContainer>
+      </Main>
+      <Footer />
+    </>
+  );
+};
 const Main = styled.main`
   display: flex;
   flex-direction: column;
@@ -99,96 +184,6 @@ const FilledHeartIcon = styled(AiFillHeart)`
   cursor: pointer;
   transition: color 0.3s ease;
 `;
-
-
-const formatDate = (dateString) => {
-  const date = new Date(dateString);
-  const formattedDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
-  return formattedDate;
-};
-
-
-const Category = () => {
-  const [data, setData] = useState([]);
-  const { category } = useParams();
-
-  const [likedArticles, setLikedArticles] = useState([]);
-
-  const saveHandler = async (url) => {
-    console.log("myKey", url);
-    const response = await fetch("http://localhost:8080/api/articles/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        user_id: 1,
-        article_id: url,
-      }),
-    });
-    const responseData = await response.json();
-    console.log(responseData);
-  };
-
-  useEffect(() => {
-    const getNewsData = async () => {
-      const url = `http://localhost:8080/api/articles/category/${category}`;
-      const response = await fetch(url);
-      const data = await response.json();
-      setData(data.articles);
-      console.log(category, ":", data);
-    };
-
-    getNewsData();
-  }, [category]);
-
-  const handleLikeArticle = (event, url) => {
-    event.preventDefault(); // Prevent link behavior
-    if (likedArticles.includes(url)) {
-      setLikedArticles(likedArticles.filter((article) => article !== url));
-    } else {
-      setLikedArticles([...likedArticles, url]);
-    }
-  };
-
-  const isArticleLiked = (url) => {
-    return likedArticles.includes(url);
-  };
-
-  return (
-    <>
-      <Header />
-      <Main className={`${category}Page`}>
-        <CategoryTitle>{category}</CategoryTitle>
-        <NewsContainer>
-          {data.map((article, index) => (
-            <NewsCard to={article.url} key={index}>
-              {article.urlToImage && (
-                <NewsImage src={article.urlToImage} alt="Article" />
-              )}
-              <NewsTitle>{article.title}</NewsTitle>
-              <NewsDescription>{article.description}</NewsDescription>
-              <NewsPublishedAt>{formatDate(article.publishedAt)}</NewsPublishedAt>
-              <HeartContainer>
-                {isArticleLiked(article.url) ? (
-                  <FilledHeartIcon
-                    onClick={(event) => handleLikeArticle(event, article.url)}
-                  />
-                ) : (
-                  <HeartIcon
-                    isLiked={isArticleLiked(article.url)}
-                    onClick={(event) => handleLikeArticle(event, article.url)}
-                  />
-                )}
-              </HeartContainer>
-            </NewsCard>
-          ))}
-        </NewsContainer>
-      </Main>
-      <Footer />
-    </>
-  );
-};
 
 export default Category;
 
