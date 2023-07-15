@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import Footer from "../sectioning/Footer";
 import Header from "../sectioning/Header";
 import GlobalStyles from "../components/GlobalStyles";
@@ -25,9 +25,6 @@ const NewsContainer = styled.div`
   justify-content: center;
 `;
 
-
-
-
 const NewsCard = styled.div`
   background-color: #f5f5f5;
   border-radius: 10px;
@@ -39,6 +36,11 @@ const NewsCard = styled.div`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 300px;
   cursor: pointer;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
 `;
 
 const NewsImage = styled.img`
@@ -61,8 +63,34 @@ const NewsDescription = styled.p`
   text-align: center;
 `;
 
+const NewsDate = styled.p`
+  font-size: 14px;
+  color: #999;
+  text-align: center;
+  margin-bottom: 5px;
+`;
+
+const HeartIcon = styled(AiOutlineHeart)`
+  font-size: 20px;
+  color: #666;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+
+  &:hover {
+    color: #e74c3c;
+  }
+`;
+
+const FilledHeartIcon = styled(AiFillHeart)`
+  font-size: 20px;
+  color: #e74c3c;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+`;
+
 const Headlines = () => {
   const [headlines, setHeadlines] = useState([]);
+  const [likedArticles, setLikedArticles] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:8080/api/headlines/")
@@ -77,7 +105,20 @@ const Headlines = () => {
   }, []);
 
   const handleArticleClick = (url) => {
-    window.location.href = url; // Redirect to the article url
+    window.location.href = url;
+  };
+
+  const handleLikeArticle = (event, url) => {
+    event.stopPropagation(); // Stop propagation to prevent card click event
+    if (likedArticles.includes(url)) {
+      setLikedArticles(likedArticles.filter((article) => article !== url));
+    } else {
+      setLikedArticles([...likedArticles, url]);
+    }
+  };
+
+  const isArticleLiked = (url) => {
+    return likedArticles.includes(url);
   };
 
   return (
@@ -97,6 +138,16 @@ const Headlines = () => {
               )}
               <NewsTitle>{headline.title}</NewsTitle>
               <NewsDescription>{headline.description}</NewsDescription>
+              <NewsDate>{headline.publishedAt.substring(0, 10)}</NewsDate>
+              {isArticleLiked(headline.url) ? (
+                <FilledHeartIcon
+                  onClick={(event) => handleLikeArticle(event, headline.url)}
+                />
+              ) : (
+                <HeartIcon
+                  onClick={(event) => handleLikeArticle(event, headline.url)}
+                />
+              )}
             </NewsCard>
           ))}
         </NewsContainer>

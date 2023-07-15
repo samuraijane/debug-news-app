@@ -47,7 +47,6 @@ server.get('/heartbeat', (req, res) => {
 server.use("/api/articles",articleRoutes); //combined here
 server.use("/api/headlines",headlineRoutes)
 server.use("/api/world",worldRoutes);
-
 server.use("/auth",authRoutes)
 
 

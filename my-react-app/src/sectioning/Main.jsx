@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { Politics, World } from "../views";
 
 const Main = () => {
-  return <main class="y-wrap">Landing page stuff</main>;
+  return <main className="y-wrap">Landing page stuff</main>;
 };
 
 export default Main;
