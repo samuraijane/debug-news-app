@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Footer from "../sectioning/Footer";
 import Header from "../sectioning/Header";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import GlobalStyles from "../components/GlobalStyles";
-
 
 const Main = styled.main`
   display: flex;
@@ -18,6 +18,7 @@ const Title = styled.h1`
   color: #fff;
   font-style: italic;
 `;
+
 const SearchInput = styled.input`
   width: 300px;
   height: 30px;
@@ -25,6 +26,7 @@ const SearchInput = styled.input`
   margin-bottom: 10px;
   color: black;
 `;
+
 const CountryList = styled.ul`
   display: flex;
   flex-wrap: wrap;
@@ -83,12 +85,44 @@ const NewsDescription = styled.p`
   text-align: center;
 `;
 
+const HeartIcon = styled(AiOutlineHeart)`
+  font-size: 20px;
+  color: ${({ isLiked }) => (isLiked ? "#ff4081" : "#666")};
+  cursor: pointer;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #ff4081;
+  }
+`;
+
+const FilledHeartIcon = styled(AiFillHeart)`
+  font-size: 20px;
+  color: #ff4081;
+  cursor: pointer;
+  transition: color 0.3s ease;
+`;
+
 const World = () => {
   const [countries, setCountries] = useState([]);
   const [searchCountry, setSearchCountry] = useState("");
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [headlines, setHeadlines] = useState([]);
   const [selectedCountryArticles, setSelectedCountryArticles] = useState([]);
+  const [likedArticles, setLikedArticles] = useState([]);
+
+  const handleLikeArticle = (event, url) => {
+    event.preventDefault(); // Prevent link behavior
+    if (likedArticles.includes(url)) {
+      setLikedArticles(likedArticles.filter((article) => article !== url));
+    } else {
+      setLikedArticles([...likedArticles, url]);
+    }
+  };
+
+  const isArticleLiked = (url) => {
+    return likedArticles.includes(url);
+  };
 
   useEffect(() => {
     fetch("https://restcountries.com/v3.1/all")
@@ -189,6 +223,10 @@ const World = () => {
                   )}
                   <NewsTitle>{article.title}</NewsTitle>
                   <NewsDescription>{article.description}</NewsDescription>
+                  <HeartIcon
+                    onClick={(event) => handleLikeArticle(event, article.url)}
+                    isLiked={isArticleLiked(article.url)}
+                  />
                 </NewsCard>
               ))
             ) : (
