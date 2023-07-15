@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-
+import React, { useState } from "react";
+import styled from "styled-components";
 
 const Container = styled.div`
   display: flex;
@@ -53,22 +52,6 @@ export default function Register() {
     <Container>
       <Title>Register</Title>
       <Form onSubmit={handleSubmit}>
-        <Input
-          type="text"
-          name="id"
-          value={formData.id}
-          onChange={handleChange}
-          placeholder="ID"
-          required
-        />
-        <Input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          placeholder="Name"
-          required
-        />
         <Input
           type="email"
           name="email"

@@ -4,34 +4,35 @@ import Header from "./sectioning/Header";
 import Main from "./sectioning/Main";
 import Footer from "./sectioning/Footer";
 import Register from "./components/Register";
+import Landing from "./components/Landing";
 import "./app.css";
 import GlobalStyles from "./components/GlobalStyles";
 
 const MobileHeader = styled(Header)`
-display: flex;
-justify-content: space-between;
-align-items: center;
-padding: 10px;
-background-color: #333;
-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #333;
+  color: #fff;
 
-@media (min-width: 768px) {
-  display: none;
-}
+  @media (min-width: 768px) {
+    display: none;
+  }
 `;
 
 const MobileFooter = styled(Footer)`
-display: flex;
-justify-content: center;
-align-items: center;
-padding: 10px;
-background-color: #333;
-color: #fff;
-font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: #333;
+  color: #fff;
+  font-size: 14px;
 
-@media (min-width: 768px) {
-  display: none;
-}
+  @media (min-width: 768px) {
+    display: none;
+  }
 `;
 const MobileMenu = styled.ul`
   position: absolute;
@@ -73,10 +74,16 @@ export default function App() {
   return (
     <>
       <GlobalStyles />
-      <MobileHeader isMobileMenuOpen={isMobileMenuOpen} onToggleMobileMenu={toggleMobileMenu} />
-      <Register />
+      <MobileHeader
+        isMobileMenuOpen={isMobileMenuOpen}
+        onToggleMobileMenu={toggleMobileMenu}
+      />
+      <Landing />
       <Main />
-      <MobileFooter isMobileMenuOpen={isMobileMenuOpen} onToggleMobileMenu={toggleMobileMenu} />
+      <MobileFooter
+        isMobileMenuOpen={isMobileMenuOpen}
+        onToggleMobileMenu={toggleMobileMenu}
+      />
     </>
   );
 }

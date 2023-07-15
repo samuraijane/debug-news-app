@@ -8,6 +8,9 @@ import User from '../models/userSchema.js';
 // router.get() method to specify the HTTP method as GET and the route pattern as /category/:category.
 //URL with the category parameter and an API key from the environment variables to fetch data from the News API.
 //response is converted to jason  and is sent back as res.json 
+
+
+
 router.get("/category/:category", async (req, res) => { // fetch call here 
     
     try{
@@ -25,9 +28,10 @@ router.get("/category/:category", async (req, res) => { // fetch call here
 
 })
 
-
+//need to add middleware 
+//next routes api/favourites -example 
 // finding user id and adding selected article  to fav list 
-router.post("/", async (req, res)=> {
+router.post("/", async (req, res)=> { //local host 8080
     //userid, articleid
     console.log(req.body)
     try{
