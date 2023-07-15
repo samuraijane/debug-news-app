@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Header from "../sectioning/Header";
@@ -145,6 +146,7 @@ const NewsTitle = styled.h2`
   font-size: 18px;
   margin-bottom: 10px;
   text-align: center;
+
 `;
 
 const NewsDescription = styled.p`
