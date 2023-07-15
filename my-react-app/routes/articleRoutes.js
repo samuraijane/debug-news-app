@@ -1,6 +1,6 @@
 import express from 'express'; // import express module 
 let router = express.Router(); // handle url // router object allows you to define routes and associated request handlers for those routes. 
-
+import User from '../models/userSchema.js';
 
 //get all articles
 //fetch function  used to make HTTP request
@@ -26,22 +26,69 @@ router.get("/category/:category", async (req, res) => { // fetch call here
 })
 
 
-//get one article by id - wait to build database, we need to read data base to see what they saved. 
-//
-router.get("/:id", (req, res) => {
+// finding user id and adding selected article  to fav list 
+router.post("/", async (req, res)=> {
+    //userid, articleid
+    console.log(req.body)
+    try{
+        const result = await User.findByIdAndUpdate(
+            req.body.user_id,
+            {
+                $push: {  favoriteList: req.body.article_id}
+            }
 
+        );
+
+        const result2 = await User.findById(
+            req.body.user_id
+        )
+
+        res.json(result2)
+    } catch (err){
+        console.log(err);
+        res.json(err)
+    }
+
+});
+
+
+//showing user by id profile
+// need to do fetch to account page to display informaiton 
+router.get("/user/:user_id", async (req, res) => {
+    console.log(req.params.id)
+
+    try{
+        const result = await User.findById(
+            req.params.user_id
+        )
+        res.json(result)
+    } catch (err){
+        console.log(err);
+        res.json(err)
+    }
+
+    /*
+    let { username } = req.body;
+    let user_Id = await db.query(`SELECT userId FROM userinfo WHERE username='${username}'`)
+    let favoriteArticles = await db.query(`SELECT favoriteArticles FROM favorites WHERE user_id='${user_Id}'`);
+    res.json(favoriteArticles);
+    */
 })
 
+router.get('/id', async (req, res) => {
 
+    //let favorites = db.query(`SELECT * from favorites WHERE personid =`{user_id})
+})
 // /api/articles 
 //defining a POST route handler for the root URL (/api/articles). 
 //It will handle the request when a client sends a POST request to /api/articles
 //The route handler logs the userId and articleId received in the request's body
 //It typically performs operations like saving the article to a database or performing other relevant operations
 //it sends a JSON response with a "Saved Article!" message
+/*
 router.post("/", (req, res) => { // sending data to body , send user id and article from favs, whos is selecting that would come from data. post is what we are getting from user. server is receiving. 
 
-    console.log( req.body.userId, req.body.articleId );
+   // console.log( req.body.userId, req.body.articleId );
 
     /*
     const result = await Favorites.create({
@@ -51,15 +98,18 @@ router.post("/", (req, res) => { // sending data to body , send user id and arti
     */
    
     //need to save to database
+    /*
     res.json({
         message: "Saved Article!"
     })
 
-});
+});*/
 
 router.delete("/:id", (req, res) => {
 
 });
+
+
 
 //REST METHOD 
 //GET - receive data - url 

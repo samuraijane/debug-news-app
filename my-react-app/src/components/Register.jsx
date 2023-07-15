@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 
 const Container = styled.div`
   display: flex;
@@ -33,10 +33,10 @@ const Button = styled.button`
 
 export default function Register() {
   const [formData, setFormData] = useState({
-    id: '',
-    name: '',
-    email: '',
-    password: '',
+    id: "",
+    name: "",
+    email: "",
+    password: "",
   });
 
   const handleChange = (e) => {
@@ -52,10 +52,38 @@ export default function Register() {
     <Container>
       <Title>Register</Title>
       <Form onSubmit={handleSubmit}>
-        <Input type="text" name="id" value={formData.id} onChange={handleChange} placeholder="ID" required />
-        <Input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Name" required />
-        <Input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" required />
-        <Input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" required />
+        <Input
+          type="text"
+          name="id"
+          value={formData.id}
+          onChange={handleChange}
+          placeholder="ID"
+          required
+        />
+        <Input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          placeholder="Name"
+          required
+        />
+        <Input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          placeholder="Email"
+          required
+        />
+        <Input
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          placeholder="Password"
+          required
+        />
         <Button type="submit">Register</Button>
       </Form>
     </Container>

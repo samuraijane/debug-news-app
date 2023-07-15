@@ -3,12 +3,9 @@ import Header from "../sectioning/Header";
 import Footer from "../sectioning/Footer";
 import { useParams, Link } from "react-router-dom"; // need this for url information/changes to used in line 8
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import styled from 'styled-components'
+import styled from "styled-components";
 
 import GlobalStyles from "../components/GlobalStyles";
-
-
-
 
 const Main = styled.main`
   display: flex;
@@ -52,7 +49,6 @@ const NewsTitle = styled.h2`
   font-size: 18px;
   margin-bottom: 5px;
   text-align: center;
-
 `;
 
 const NewsDescription = styled.p`
@@ -82,7 +78,6 @@ const HeartIcon = styled(AiOutlineHeart)`
   color: #666;
 `;
 
-
 const Category = () => {
   const [data, setData] = useState([]);
   const { category } = useParams();
@@ -97,8 +92,8 @@ const Category = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        userId: 1,
-        articleId: url,
+        user_id: 1,
+        article_id: url,
       }),
       // 'Content-Type': 'application/x-www-form-urlencoded',
     });
