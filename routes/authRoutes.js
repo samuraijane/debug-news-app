@@ -1,13 +1,17 @@
 
-import express from 'express';
+const express = require ('express');
 let router = express.Router();
-import bcrypt from 'bcrypt';
-import User from '../models/userSchema.js';
-
+// import bcrypt from 'bcrypt';
+const bcrypt = require('bcrypt');
+// import User from '../models/userSchema.js';
+const User = require('../models/userSchema');
 
 
 router.post("/register", async (req, res) => { // saving data to database using post
-     const salt = await bcrypt.genSalt(10);
+
+
+   
+        const salt = await bcrypt.genSalt(10);
         const hashedpassword = await bcrypt.hash(req.body.password, salt);
 
         try {
@@ -17,6 +21,9 @@ router.post("/register", async (req, res) => { // saving data to database using 
                 password: hashedpassword
             })
 
+           
+
+          
             res.json(result);
         
         } catch (err) {
@@ -30,17 +37,26 @@ router.post("/register", async (req, res) => { // saving data to database using 
 
 router.post("/login", async (req, res) => { // comparing passwords by readiing user data 
 
-    console.log(req.body);
+    console.log("logging in")
+
+    //console.log(req.body);
     try {
 
         const OneUser = await User.findOne({
             email: req.body.email,
-        })
-       
+        });
+
+        req.session.user = {
+            email: OneUser.email,
+            id: OneUser._id      
+        };
+        req.session.save();
+        console.log("saving a session", req.session)
+
 
         bcrypt.compare(req.body.password, OneUser.password, function(err, result) {
             // result =
-            console.log(err, result);
+          
             if(result){
                 res.json(OneUser);
             } else {
@@ -60,36 +76,13 @@ router.post("/login", async (req, res) => { // comparing passwords by readiing u
         res.json(err);
 
     }
-    /*
-        const {username,password} = req.body;
-        // let results = [];
-        let dbsearch = await db.query(`SELECT * FROM userinfo WHERE username='${username}'`);
-        let dbsearch2 = await db.query(`SELECT * FROM userinfo WHERE email='${email}'`);
 
-        if (dbsearch.length > 0 || dbsearch2.length > 0) {
-            const hashedpassword = await db.query(`SELECT password FROM userinfo WHERE username='${username}'`);
-            const matchup = await bcrypt.compare(password, hashedpassword[0].password);
-            if (matchup) {
-                res.json({
-                    username: username,
-                    isAuthenticated: true,
-                    redirectTo: '/headlineroutes'
-                })
-            }
-        } else {
-            res.json({message: 'user does not exist'})
-        }
-    })
-    res.json({
-        something: "value"
-    })
-    */
 
 })
 
 
-export default router;
-
+// export default router;
+module.exports = router;
 
 // write code to compare 
 //using bcrypt 

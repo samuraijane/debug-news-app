@@ -5,7 +5,6 @@ import Header from "../sectioning/Header";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import GlobalStyles from "../components/GlobalStyles";
 
-
 const Main = styled.main`
   display: flex;
   flex-direction: column;
@@ -145,6 +144,7 @@ const World = () => {
           console.log("Error fetching headlines:", error);
         });
 
+      /*
       const apiKey = "97ff5fe754fd47b9830aa078f40a6acc";
       fetch(
         `https://newsapi.org/v2/top-headlines?q=${selectedCountry.name.common}&apiKey=${apiKey}`
@@ -156,15 +156,29 @@ const World = () => {
         .catch((error) => {
           console.log("Error fetching country articles:", error);
         });
+        */
     }
   }, [selectedCountry]);
 
+  const saveHandler = async (url) => {
+    console.log("myKey", url);
+    const response = await fetch("http://localhost:8080/api/articles/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user_id: 1,
+        article_id: url,
+      }),
+    });
+    const responseData = await response.json();
+    console.log(responseData);
+  };
+
   const handleCountryClick = (country) => {
     setSelectedCountry(country);
-    const apiKey = "97ff5fe754fd47b9830aa078f40a6acc";
-    fetch(
-      `https://newsapi.org/v2/top-headlines?q=${country.name.common}&apiKey=${apiKey}`
-    )
+    fetch(`http://localhost:8080/api/headlines/country/${country.name.common}`)
       .then((response) => response.json())
       .then((data) => {
         setSelectedCountryArticles(data.articles);
@@ -223,7 +237,7 @@ const World = () => {
                   <NewsTitle>{article.title}</NewsTitle>
                   <NewsDescription>{article.description}</NewsDescription>
                   <HeartIcon
-                    onClick={(event) => handleLikeArticle(event, article.url)}
+                    onClick={(event) => saveHandler(article.url)}
                     isLiked={isArticleLiked(article.url)}
                   />
                 </NewsCard>

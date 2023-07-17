@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Header from "../sectioning/Header";
@@ -7,11 +6,11 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import styled from "styled-components";
 import GlobalStyles from "../components/GlobalStyles";
 
-
-
 const formatDate = (dateString) => {
   const date = new Date(dateString);
-  const formattedDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+  const formattedDate = `${
+    date.getMonth() + 1
+  }/${date.getDate()}/${date.getFullYear()}`;
   return formattedDate;
 };
 
@@ -75,7 +74,9 @@ const Category = () => {
               )}
               <NewsTitle>{article.title}</NewsTitle>
               <NewsDescription>{article.description}</NewsDescription>
-              <NewsPublishedAt>{formatDate(article.publishedAt)}</NewsPublishedAt>
+              <NewsPublishedAt>
+                {formatDate(article.publishedAt)}
+              </NewsPublishedAt>
               <HeartContainer>
                 {isArticleLiked(article.url) ? (
                   <FilledHeartIcon
@@ -111,23 +112,23 @@ const CategoryTitle = styled.h1`
 `;
 
 const NewsContainer = styled.div`
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 `;
 
 const NewsCard = styled(Link)`
-background-color: #f5f5f5;
-border-radius: 10px;
-padding: 10px;
-margin: 10px;
-display: flex;
-flex-direction: column;
-align-items: center;
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-width: 300px;
-cursor: pointer;
-text-decoration: none;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  cursor: pointer;
+  text-decoration: none;
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -146,7 +147,6 @@ const NewsTitle = styled.h2`
   font-size: 18px;
   margin-bottom: 10px;
   text-align: center;
-
 `;
 
 const NewsDescription = styled.p`
@@ -188,4 +188,3 @@ const FilledHeartIcon = styled(AiFillHeart)`
 `;
 
 export default Category;
-

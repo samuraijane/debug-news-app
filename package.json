@@ -22,8 +22,22 @@
     "vite": "^4.4.1"
   },
   "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cookie-sessions": "^0.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "express-sessions": "^1.0.6",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
+    "mongodb": "^5.7.0",
+    "mongoose": "^7.3.4",
+    "node": "^20.4.0",
+    "nodemon": "^3.0.1",
+    "path": "^0.12.7",
+    "pg": "^8.11.1",
+    "pg-hstore": "^2.3.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sort-by": "^1.2.0"

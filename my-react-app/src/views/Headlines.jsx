@@ -108,12 +108,32 @@ const Headlines = () => {
     window.location.href = url;
   };
 
+  const saveArticle = async (url) => {
+    try {
+      const response = await fetch("http://localhost:8080/api/articles/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user_id: 1, // Replace with the actual user ID
+          article_id: url, // Replace with the actual article ID or data
+        }),
+      });
+      const responseData = await response.json();
+      console.log(responseData);
+    } catch (error) {
+      console.error("Error saving article:", error);
+    }
+  };
+
   const handleLikeArticle = (event, url) => {
     event.stopPropagation(); // Stop propagation to prevent card click event
     if (likedArticles.includes(url)) {
       setLikedArticles(likedArticles.filter((article) => article !== url));
     } else {
       setLikedArticles([...likedArticles, url]);
+      saveArticle(url); // Save the article when it is liked
     }
   };
 

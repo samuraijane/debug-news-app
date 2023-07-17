@@ -1,13 +1,15 @@
-import express from 'express'; // import express module 
-let router = express.Router(); // handle url // router object allows you to define routes and associated request handlers for those routes. 
-import User from '../models/userSchema.js';
+const express = require ('express'); // import express module 
+const router = express.Router(); // handle url // router object allows you to define routes and associated request handlers for those routes. 
+//let router = express.Router(); // handle url // router object allows you to define routes and associated request handlers for those routes. 
+// import User from '../models/userSchema.js'; // mongo 
+const User = require ('../models/userSchema.js')
 
 //get all articles
 //fetch function  used to make HTTP request
 //defining GET route handler for the /category/:category endpoint
 // router.get() method to specify the HTTP method as GET and the route pattern as /category/:category.
 //URL with the category parameter and an API key from the environment variables to fetch data from the News API.
-//response is converted to jason  and is sent back as res.json 
+//response is converted to json  and is sent back as res.json 
 
 
 
@@ -57,13 +59,28 @@ router.post("/", async (req, res)=> { //local host 8080
 
 
 //showing user by id profile
+// returns, id, email, password, favoriteList that needs to go to user profile page
 // need to do fetch to account page to display informaiton 
-router.get("/user/:user_id", async (req, res) => {
-    console.log(req.params.id)
+router.get("/user", async (req, res) => {
+
+    console.log(req.session) // ask for session by console log 
+    /*
+    if(req.session.user.hasOwnProperty('id')){
+        res.json({
+            message: "No Session User ID Please Log in"
+        })
+    } else {
+        res.json({
+            message: "pass"
+        })
+    }
+*/
 
     try{
+    
+        //console.log("do i have session??",  req.session.user.id)
         const result = await User.findById(
-            req.params.user_id
+            req.session.user.id
         )
         res.json(result)
     } catch (err){
@@ -71,12 +88,6 @@ router.get("/user/:user_id", async (req, res) => {
         res.json(err)
     }
 
-    /*
-    let { username } = req.body;
-    let user_Id = await db.query(`SELECT userId FROM userinfo WHERE username='${username}'`)
-    let favoriteArticles = await db.query(`SELECT favoriteArticles FROM favorites WHERE user_id='${user_Id}'`);
-    res.json(favoriteArticles);
-    */
 })
 
 router.get('/id', async (req, res) => {
@@ -109,10 +120,6 @@ router.post("/", (req, res) => { // sending data to body , send user id and arti
 
 });*/
 
-router.delete("/:id", (req, res) => {
-
-});
-
 
 
 //REST METHOD 
@@ -123,4 +130,4 @@ router.delete("/:id", (req, res) => {
 
 
 
-export default router;
+module.exports = router;
