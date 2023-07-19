@@ -47,7 +47,7 @@ router.post("/login", async (req, res) => { // comparing passwords by readiing u
             email: req.body.email,
         });
 
-        req.session.user = {
+        req.session.user = { //saving session 
             email: OneUser.email,
             id: OneUser._id      
         };

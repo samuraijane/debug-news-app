@@ -8,16 +8,14 @@ const userSchema  = new Schema({
     email: {
         type: String,
         require: true,
-        index:true,
         unique: true,
-        sparse:true
+      
     },
     password: {
         type: String,
-        index: true,
         require: true,
-        unique: true,
-        sparse:true
+   
+  
 
     },
     favoriteList: {

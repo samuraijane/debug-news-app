@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import GlobalStyles from "../components/GlobalStyles";
 
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -53,7 +52,6 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-
 const AccountPage = () => {
   const [formData, setFormData] = useState({
     id: "",
@@ -74,60 +72,59 @@ const AccountPage = () => {
 
   return (
     <>
-    <GlobalStyles/>
-    <Container>
-      <Title>Account Settings</Title>
-      <Form onSubmit={handleSubmit}>
-        <FormItem>
-          <Label>ID:</Label>
-          <Input
-            type="text"
-            name="id"
-            value={formData.id}
-            onChange={handleChange}
-            placeholder="ID"
-            required
-          />
-        </FormItem>
-        <FormItem>
-          <Label>Name:</Label>
-          <Input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            placeholder="Name"
-            required
-          />
-        </FormItem>
-        <FormItem>
-          <Label>Email:</Label>
-          <Input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="Email"
-            required
-          />
-        </FormItem>
-        <FormItem>
-          <Label>Password:</Label>
-          <Input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            placeholder="Password"
-            required
-          />
-        </FormItem>
-        <Button type="submit">Login</Button>
-      </Form>
-    </Container>
+      <GlobalStyles />
+      <Container>
+        <Title>Account Settings</Title>
+        <Form onSubmit={handleSubmit}>
+          <FormItem>
+            <Label>ID:</Label>
+            <Input
+              type="text"
+              name="id"
+              value={formData.id}
+              onChange={handleChange}
+              placeholder="ID"
+              required
+            />
+          </FormItem>
+          <FormItem>
+            <Label>Name:</Label>
+            <Input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              placeholder="Name"
+              required
+            />
+          </FormItem>
+          <FormItem>
+            <Label>Email:</Label>
+            <Input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Email"
+              required
+            />
+          </FormItem>
+          <FormItem>
+            <Label>Password:</Label>
+            <Input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Password"
+              required
+            />
+          </FormItem>
+          <Button type="submit">Login</Button>
+        </Form>
+      </Container>
     </>
   );
 };
-
 
 export default AccountPage;

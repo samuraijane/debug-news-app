@@ -51,7 +51,7 @@ server.use(express.json());
 
 //reads the disct files
 
-server.use(express.static(path.resolve(__dirname + '/my-react-app/dist')));
+//server.use(express.static(path.resolve(__dirname + '/my-react-app/dist')));
 
 
 main().catch(err=> console.log(err));
@@ -63,7 +63,7 @@ async function main(){
 
 
 
-//server.use(express.static(path.resolve(`${__dirname}/react-ui/build`)));
+server.use(express.static(path.resolve(`${__dirname}/my-react-app/dist`)));
 
 const cn = {
   host: 'localhost',
