@@ -14,6 +14,7 @@ const authRoutes = require ('./routes/authRoutes.js')
 const exp = require('constants')
 
 
+
 const server = express();
 const PORT = 8080;
 
@@ -50,7 +51,7 @@ server.use(express.json());
 
 //reads the disct files
 
-server.use(express.static(path.resolve(__dirname + '/my-react-app/dist')));
+//server.use(express.static(path.resolve(__dirname + '/my-react-app/dist')));
 
 
 main().catch(err=> console.log(err));
@@ -62,7 +63,7 @@ async function main(){
 
 
 
-//server.use(express.static(path.resolve(`${__dirname}/react-ui/build`)));
+server.use(express.static(path.resolve(`${__dirname}/my-react-app/dist`)));
 
 const cn = {
   host: 'localhost',
@@ -80,6 +81,8 @@ server.get('/heartbeat', (req, res) => {
 });
 
 
+// Routes
+// server.use('/auth', authRoutes); // Login & register
 // server points 
 server.use("/api/articles",articleRoutes); //combined here
 server.use("/api/headlines",headlineRoutes) //headline
