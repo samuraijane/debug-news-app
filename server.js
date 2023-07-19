@@ -14,6 +14,7 @@ const authRoutes = require ('./routes/authRoutes.js')
 const exp = require('constants')
 
 
+
 const server = express();
 const PORT = 8080;
 
@@ -80,6 +81,8 @@ server.get('/heartbeat', (req, res) => {
 });
 
 
+// Routes
+// server.use('/auth', authRoutes); // Login & register
 // server points 
 server.use("/api/articles",articleRoutes); //combined here
 server.use("/api/headlines",headlineRoutes) //headline

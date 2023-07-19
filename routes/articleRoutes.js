@@ -3,7 +3,7 @@ const router = express.Router(); // handle url // router object allows you to de
 //let router = express.Router(); // handle url // router object allows you to define routes and associated request handlers for those routes. 
 // import User from '../models/userSchema.js'; // mongo 
 const User = require ('../models/userSchema.js')
-
+const checkAuth = require('../middleware/checkAuth');
 //get all articles
 //fetch function  used to make HTTP request
 //defining GET route handler for the /category/:category endpoint
@@ -13,7 +13,7 @@ const User = require ('../models/userSchema.js')
 
 
 
-router.get("/category/:category", async (req, res) => { // fetch call here 
+router.get("/category/:category", checkAuth, async (req, res) => { // fetch call here 
     
     try{
         const url = `https://newsapi.org/v2/everything?q=${req.params.category}&apikey=${process.env.API_KEY}`; // params is what we pass through in the url and this case that would be the catergory. 
@@ -33,7 +33,7 @@ router.get("/category/:category", async (req, res) => { // fetch call here
 //need to add middleware 
 //next routes api/favourites -example 
 // finding user id and adding selected article  to fav list 
-router.post("/", async (req, res)=> { //local host 8080
+router.post("/", checkAuth, async (req, res)=> { //local host 8080
     //userid, articleid
     console.log(req.body)
     try{
@@ -61,7 +61,7 @@ router.post("/", async (req, res)=> { //local host 8080
 //showing user by id profile
 // returns, id, email, password, favoriteList that needs to go to user profile page
 // need to do fetch to account page to display informaiton 
-router.get("/user", async (req, res) => {
+router.get("/user", checkAuth, async (req, res) => {
 
     console.log(req.session) // ask for session by console log 
     /*

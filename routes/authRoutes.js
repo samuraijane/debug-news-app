@@ -7,31 +7,32 @@ const bcrypt = require('bcrypt');
 const User = require('../models/userSchema');
 
 
+
 router.post("/register", async (req, res) => { // saving data to database using post
 
 
    
-        const salt = await bcrypt.genSalt(10);
-        const hashedpassword = await bcrypt.hash(req.body.password, salt);
+    const salt = await bcrypt.genSalt(10);
+    const hashedpassword = await bcrypt.hash(req.body.password, salt);
 
-        try {
+    try {
 
-            const result = await User.create({
-                email: req.body.email,
-                password: hashedpassword
-            })
+        const result = await User.create({
+            email: req.body.email,
+            password: hashedpassword
+        })
 
-           
-
-          
-            res.json(result);
-        
-        } catch (err) {
-            console.log(err);
-            res.json(err);
-
-        }
        
+
+      
+        res.json(result);
+    
+    } catch (err) {
+        console.log(err);
+        res.json(err);
+
+    }
+   
 
 });
 
