@@ -13,11 +13,8 @@ const worldRoutes = require ('./routes/worldRoutes.js')
 const authRoutes = require ('./routes/authRoutes.js')
 const exp = require('constants')
 
-
-
 const server = express();
 const PORT = 8080;
-
 
 // //middleware
 // server.use(cors())
@@ -26,7 +23,6 @@ const PORT = 8080;
 // server.use(express.json());
 
 // Enable Cross-Origin Resource Sharing (CORS)
-
 
 server.use(
   session({
@@ -40,7 +36,6 @@ server.use(
   })
 );
 
-
 server.use(cors());
 
 // Parse URL-encoded request bodies
@@ -49,21 +44,11 @@ server.use(express.urlencoded({ extended: true }));
 // Parse JSON request bodies
 server.use(express.json());
 
-//reads the disct files
-
-//server.use(express.static(path.resolve(__dirname + '/my-react-app/dist')));
-
-
 main().catch(err=> console.log(err));
 
 async function main(){
-
-    await mongoose.connect('mongodb+srv://suleimanhodan9:VAXyKAHBU2HjaeDx@cluster0.n0x2sha.mongodb.net/?retryWrites=true&w=majority')
+  await mongoose.connect('mongodb+srv://suleimanhodan9:VAXyKAHBU2HjaeDx@cluster0.n0x2sha.mongodb.net/?retryWrites=true&w=majority')
 }
-
-
-
-// server.use(express.static(path.resolve(`${__dirname}/my-react-app/dist`)));
 
 const cn = {
   host: 'localhost',
@@ -77,9 +62,8 @@ const cn = {
 //const db = pgp(cn);
 
 server.get('/heartbeat', (req, res) => {
-  res.json({ message: 'heartbeat' });
+  res.json({ message: 'heartbeat2' });
 });
-
 
 // Routes
 // server.use('/auth', authRoutes); // Login & register
@@ -88,8 +72,6 @@ server.use("/api/articles",articleRoutes); //combined here
 server.use("/api/headlines",headlineRoutes) //headline
 server.use("/api/world",worldRoutes); // world
 server.use("/auth",authRoutes) //login & register 
-
-
 
 // catch-all so react can handle routing
 server.get('*', (req, res) => {
