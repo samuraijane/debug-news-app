@@ -81,3 +81,5 @@ server.get('*', (req, res) => {
 server.listen(PORT, async () => {
   console.log(`This server is running at PORT ${PORT}`);
 });
+
+module.exports = server;
