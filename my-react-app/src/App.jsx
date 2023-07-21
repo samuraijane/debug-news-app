@@ -5,7 +5,7 @@ import Main from "./sectioning/Main";
 import Footer from "./sectioning/Footer";
 import Register from "./components/Register";
 import Landing from "./components/Landing";
-import "./app.css";
+import "./App.css";
 import GlobalStyles from "./components/GlobalStyles";
 
 const MobileHeader = styled(Header)`

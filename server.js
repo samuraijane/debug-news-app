@@ -63,7 +63,7 @@ async function main(){
 
 
 
-server.use(express.static(path.resolve(`${__dirname}/my-react-app/dist`)));
+// server.use(express.static(path.resolve(`${__dirname}/my-react-app/dist`)));
 
 const cn = {
   host: 'localhost',
@@ -93,7 +93,7 @@ server.use("/auth",authRoutes) //login & register
 
 // catch-all so react can handle routing
 server.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, './my-react-app/dist', 'index.html'));
+  res.sendFile(path.resolve(__dirname, './dist', 'index.html'));
 });
 
 server.listen(PORT, async () => {
