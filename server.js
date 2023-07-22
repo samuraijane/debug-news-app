@@ -63,7 +63,7 @@ const cn = {
 
 //const db = pgp(cn);
 
-server.get('/heartbeat', (req, res) => {
+server.get('/api/heartbeat', (req, res) => {
   res.json({ message: 'heartbeat2' });
 });
 
