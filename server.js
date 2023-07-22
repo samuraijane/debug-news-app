@@ -76,9 +76,9 @@ server.use("/api/world",worldRoutes); // world
 server.use("/auth",authRoutes) //login & register 
 
 // catch-all so react can handle routing
-// server.get('*', (req, res) => {
-//   res.sendFile(path.resolve(__dirname, './dist', 'index.html'));
-// });
+server.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './dist', 'index.html'));
+});
 
 server.listen(PORT, async () => {
   console.log(`This server is running at PORT ${PORT}`);
