@@ -2,9 +2,12 @@
   "version": 2,
   "routes": [
       {
-        "src": "/(.*)",
+        "src": "/api",
         "dest": "server.js"
+      },
+      {
+        "src": "/",
+        "dest": "dist/index.html"
       }
-  ],
-  "outputDirectory": "dist"
+  ]
 }
