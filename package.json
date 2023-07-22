@@ -4,10 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "rimraf dist && cd my-react-app/ && npm install && npm run build && cd .. && mv my-react-app/dist/ public/",
-    "dev": "nodemon server.js",
+    "build": "vite build",
     "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
   },
   "repository": {
     "type": "git",
@@ -23,7 +25,15 @@
   "devDependencies": {
     "nodemon": "^3.0.1",
     "react-router-dom": "^6.14.1",
-    "vite": "^4.4.1"
+    "vite": "^4.4.1",
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
+    "@vitejs/plugin-react": "^4.0.1",
+    "eslint": "^8.44.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.1",
+    "@types/react-router-dom": "^5.3.3"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
@@ -43,6 +53,10 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rimraf": "^5.0.1",
-    "sort-by": "^1.2.0"
+    "sort-by": "^1.2.0",
+    "node-fetch": "^3.3.1",
+    "react-icons": "^4.10.1",
+    "react-router-dom": "^6.14.1",
+    "styled-components": "^6.0.3"
   }
 }
