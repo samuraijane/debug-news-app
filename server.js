@@ -44,7 +44,7 @@ server.use(express.urlencoded({ extended: true }));
 // Parse JSON request bodies
 server.use(express.json());
 
-app.use(express.static('public'))
+app.use(express.static('dist'))
 
 main().catch(err=> console.log(err));
 
