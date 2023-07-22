@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "rimraf dist && cd my-react-app/ && npm install && npm run build && cd .. && mv my-react-app/dist/ dist/",
+    "build": "rimraf dist && cd my-react-app/ && npm install && npm run build && cd .. && mv my-react-app/dist/ public/",
     "dev": "nodemon server.js",
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -44,7 +44,7 @@ server.use(express.urlencoded({ extended: true }));
 // Parse JSON request bodies
 server.use(express.json());
 
-app.use(express.static('dist'))
+app.use(express.static('public'))
 
 main().catch(err=> console.log(err));
 
@@ -77,7 +77,7 @@ server.use("/auth",authRoutes) //login & register
 
 // catch-all so react can handle routing
 server.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, './dist', 'index.html'));
+  res.sendFile(path.resolve(__dirname, './public', 'index.html'));
 });
 
 server.listen(PORT, async () => {
