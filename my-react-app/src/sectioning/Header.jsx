@@ -35,7 +35,7 @@ const Header = () => {
     <HeaderContainer>
       <GlobalStyles />
       <div className="y-wrap">
-        <Nav>Fuck me
+        <Nav>
           <Logo src="images/customlogo.JPG" alt="Logo" />
           {isMobile ? (
             <>
